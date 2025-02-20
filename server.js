@@ -46,9 +46,23 @@ app.delete("/delete-user",(req,res)=>{
     
 })
 
+app.get("/users",(req,res)=>{
+    const {email} = req.body
+    if(!email){
+        return res.status(400).json({message:"invalid email"})
+    }
+    const user = userData.find(user=>user.email === email)
+    if(!user){
+        return res.status(400).json({message:"not found user"})
+    }
+    res.send(user)
+    console.log(userdata)
+
+})
+
 
 app.listen("8000",(req,res)=>{
     console.log("server is running on port: http://localhost:8000")
-    
+
 })
 
